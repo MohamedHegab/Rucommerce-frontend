@@ -1,0 +1,60 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Welcome!</h1>
+    <p>We hope you find exactly what you're looking for a product with good promotion.</p>
+  </div>
+</div>
+
+<h3>Products Listing</h3>
+
+
+{{#list-filter
+  filter=(action "filterByName")
+as |filteredResults|
+}}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Department</th>
+        <th scope="col">Promotion Code</th>
+        <th scope="col">Discounted Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each filteredResults as |product|}}
+        <tr class="listing">
+          <td class="detail product_name">
+            {{product.name}}
+          </td>
+          <td class="detail product_price">
+            {{product.price}}
+          </td>
+          <td class="detail department_name">
+            {{product.department.name}}
+          </td>
+          <td class="detail promotion_code">
+            {{product.active_promotion.code}}
+          </td>
+          <td class="detail discounted_price">
+            {{product.discounted_price}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{#each-in 
+    filteredResults.meta.pagination 
+  as |key value|
+  }}
+    {{link-to 
+      key 
+      "products" 
+      (query-params page=value.number) 
+      class="btn btn-primary btn-small"
+    }}
+  {{/each-in}}
+  {{outlet}}
+{{/list-filter}}

@@ -1,5 +1,23 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  {{#link-to "index"}}
+    Ru-Commerce
+  {{/link-to}}
 
-{{outlet}}
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        {{#link-to "about" class="menu-about nav-link"}}
+          About <span class="sr-only">(current)</span>
+        {{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#link-to "contact" class="menu-contact nav-link"}}
+          Contact
+        {{/link-to}}
+      </li>
+    </ul>
+  </div>
+</nav>
+<main role="main" class="container">
+  {{outlet}}
+</main>
